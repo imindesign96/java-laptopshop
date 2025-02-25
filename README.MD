@@ -1,16 +1,16 @@
-# Java Spring Starter template (update)
-Template này được sử dụng cho series Java Spring MVC (dự án laptopshop) của tác giả Hỏi Dân IT (Eric)
+# Java Spring Starter Template
+
+Template này được sử dụng cho dự án **Laptop Shop** trong series **Java Spring MVC** do **Phan Ngọc Vũ** phát triển.
 
 ## Về tác giả
-Mọi thông tin về Tác giả Hỏi Dân IT, các bạn có thể tìm kiếm tại đây:
+Mọi thông tin về tác giả **Phan Ngọc Vũ**, bạn có thể tìm kiếm tại:
 
-Website chính thức: https://hoidanit.vn/
+- Website chính thức: [Đang cập nhật]  
+- Youtube: [Đang cập nhật]  
+- Tiktok: [Đang cập nhật]  
+- Fanpage: [Đang cập nhật]  
+- Udemy: [Đang cập nhật]  
 
-Youtube “Hỏi Dân IT” : https://www.youtube.com/@hoidanit
+---
 
-Tiktok “Hỏi Dân IT” :  https://www.tiktok.com/@hoidanit
-
-Fanpage “Hỏi Dân IT” : https://www.facebook.com/askITwithERIC/
-
-Udemy Hỏi Dân IT: https://www.udemy.com/user/eric-7039/
-
+Nếu bạn có bất kỳ câu hỏi nào về dự án, hãy liên hệ trực tiếp với tôi! 🚀
