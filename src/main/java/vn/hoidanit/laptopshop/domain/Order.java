@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +17,11 @@ public class Order {
 
     private double totalPrice;
 
+    // Nhiều ORDER cho 1 USER nên sẽ là quan hệ N-1
     // user id
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     public long getId() {
         return id;
