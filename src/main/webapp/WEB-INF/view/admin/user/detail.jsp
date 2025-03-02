@@ -25,49 +25,21 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Update User</h1>
+                                <h1 class="mt-4">User Detail</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Update</li>
+                                    <li class="breadcrumb-item active">User Detail</li>
                                 </ol>
 
-                                <div class="mt-5">
+                                <div class="container mt-4">
+                                    <h1 class="mb-4">User Detail ${id}</h1>
 
-                                    <div class="row">
-                                        <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Update a user</h3>
-                                            <hr />
-                                            <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
-
-                                                <div class="mb-3" style="display: none;">
-                                                    <label class="form-label">Id:</label>
-                                                    <form:input type="text" class="form-control" path="id" />
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email:</label>
-                                                    <form:input type="email" class="form-control" path="email"
-                                                        disabled="true" />
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Phone number:</label>
-                                                    <form:input type="text" class="form-control" path="phone" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Full Name:</label>
-                                                    <form:input type="text" class="form-control" path="fullName" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Address:</label>
-                                                    <form:input type="text" class="form-control" path="address" />
-                                                </div>
-
-                                                <button type="submit" class="btn btn-warning">Update</button>
-                                            </form:form>
-                                        </div>
-                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">Id: ${id}</li>
+                                        <li class="list-group-item">Email: ${email}</li>
+                                        <li class="list-group-item">Full Name: ${fullName}</li>
+                                        <li class="list-group-item">Address: ${address}</li>
+                                    </ul>
 
                                 </div>
                             </div>
