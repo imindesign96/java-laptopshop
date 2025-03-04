@@ -10,6 +10,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -18,11 +21,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Email is required")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "Email must be a valid format")
+    @Size(max = 100, message = "Email must not exceed 100 characters")
     private String email;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, max = 30, message = "Password must be between 6 and 30 characters")
     private String password;
+
+    @NotBlank(message = "Full name is required")
+    @Size(min = 2, max = 50, message = "Full name must be between 2 and 50 characters")
     private String fullName;
+
+    @NotBlank(message = "Address is required")
+    @Size(max = 200, message = "Address must not exceed 200 characters")
     private String address;
+
+    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^\\d{10,12}$", message = "Phone must be 10-12 digits")
     private String phone;
+
+    @NotBlank(message = "Avatar is required")
+    @Size(max = 255, message = "Avatar path must not exceed 255 characters")
     private String avatar;
 
     // Nhiều USER có 1 role nên sẽ là quan hệ N - 1

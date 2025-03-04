@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
@@ -66,18 +68,28 @@ public class UserController {
 
     @PostMapping(value = "/admin/user/create") // POST
     public String createUserPage(Model model,
-            @ModelAttribute("newUser") User hoidanit,
+            @Valid @ModelAttribute("newUser") User hoidanit,
+            BindingResult result,
             @RequestParam("avatarFile") MultipartFile file) {
-        String avatar = this.uploadService.handleUploadFile(file, "avatar");
+        if (result.hasErrors()) {
+            // Nếu có lỗi validation, trả về lại form với lỗi
+            return "admin/user/create";
+        }
 
-        String hashPassword = this.bCryptPasswordEncoder.encode(hoidanit.getPassword());
-        hoidanit.setAvatar(avatar);
-        hoidanit.setPassword(hashPassword);
+        try {
+            String avatar = this.uploadService.handleUploadFile(file, "avatar");
+            String hashPassword = this.bCryptPasswordEncoder.encode(hoidanit.getPassword());
+            hoidanit.setAvatar(avatar);
+            hoidanit.setPassword(hashPassword);
 
-        hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
+            hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
 
-        this.userService.handleSaveUser(hoidanit);
-        return "redirect:/admin/user";
+            this.userService.handleSaveUser(hoidanit);
+            return "redirect:/admin/user";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error uploading file or saving user: " + e.getMessage());
+            return "admin/user/create";
+        }
     }
 
     @GetMapping("/admin/user/update/{id}") // GET

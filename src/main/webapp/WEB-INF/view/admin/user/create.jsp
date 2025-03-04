@@ -60,6 +60,7 @@
                                                             <label class="form-label">Email:</label>
                                                             <form:input type="email" class="form-control"
                                                                 path="email" />
+                                                            <form:errors path="email" cssClass="text-danger" />
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -67,6 +68,7 @@
                                                             <label class="form-label">Password:</label>
                                                             <form:input type="password" class="form-control"
                                                                 path="password" />
+                                                            <form:errors path="password" cssClass="text-danger" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,6 +78,7 @@
                                                         <div class="mb-3">
                                                             <label class="form-label">Phone number:</label>
                                                             <form:input type="text" class="form-control" path="phone" />
+                                                            <form:errors path="phone" cssClass="text-danger" />
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -83,6 +86,7 @@
                                                             <label class="form-label">Full Name:</label>
                                                             <form:input type="text" class="form-control"
                                                                 path="fullName" />
+                                                            <form:errors path="fullName" cssClass="text-danger" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -90,6 +94,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" class="form-control" path="address" />
+                                                    <form:errors path="address" cssClass="text-danger" />
                                                 </div>
 
 
@@ -100,6 +105,7 @@
                                                             <form:option value="ADMIN">ADMIN</form:option>
                                                             <form:option value="USER">USER</form:option>
                                                         </form:select>
+                                                        <form:errors path="role" cssClass="text-danger" />
                                                     </div>
 
                                                     <div class="col">
@@ -107,6 +113,7 @@
                                                             <label for="avatarFile" class="form-label">Avatar:</label>
                                                             <input class="form-control" type="file" id="avatarFile"
                                                                 name="avatarFile" accept=".png, .jpg, .jpeg">
+                                                            <form:errors path="avatar" cssClass="text-danger" />
                                                         </div>
                                                     </div>
                                                 </div>
