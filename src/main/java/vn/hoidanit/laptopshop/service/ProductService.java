@@ -18,6 +18,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public Product getProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
     public List<Product> getAllProducts() {
         return this.productRepository.findAll();
     }
@@ -27,4 +31,9 @@ public class ProductService {
         System.out.println("add product: " + addedProduct);
         return addedProduct;
     }
+
+    public void deleteAUser(long id) {
+        this.productRepository.deleteById(id);
+    }
+
 }

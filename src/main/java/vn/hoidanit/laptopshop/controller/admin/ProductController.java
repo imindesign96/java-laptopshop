@@ -86,4 +86,66 @@ public class ProductController {
         return "redirect:/admin/product"; // Chuyển hướng sau khi lưu
     }
 
+    // VIEW
+
+    @GetMapping("/admin/product/{id}")
+    public String getUserDetail(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        Product productInfo = this.productService.getProductById(id);
+
+        model.addAttribute("id", productInfo.getId());
+        model.addAttribute("name", productInfo.getName());
+        model.addAttribute("price", productInfo.getPrice());
+        model.addAttribute("detailDesc", productInfo.getDetailDesc());
+        model.addAttribute("shortDesc", productInfo.getShortDesc());
+        model.addAttribute("quantity", productInfo.getQuantity());
+        model.addAttribute("factory", productInfo.getFactory());
+        model.addAttribute("target", productInfo.getTarget());
+
+        return "admin/product/detail";
+    }
+
+    // UPDATE
+    @GetMapping("/admin/product/update/{id}") // GET
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        Product currentProduct = this.productService.getProductById(id);
+        model.addAttribute("newProduct", currentProduct);
+        return "admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String postUpdateProduct(Model model, @ModelAttribute("newProduct") Product product) {
+        Product currentProduct = this.productService.getProductById(product.getId());
+        if (currentProduct != null) {
+            currentProduct.setName(product.getName());
+            currentProduct.setPrice(product.getPrice());
+            currentProduct.setDetailDesc(product.getDetailDesc());
+            currentProduct.setShortDesc(product.getShortDesc());
+            currentProduct.setQuantity(product.getQuantity());
+            currentProduct.setFactory(product.getFactory());
+            currentProduct.setTarget(product.getTarget());
+            currentProduct.setImage(product.getImage()); // Thêm image
+            currentProduct.setSold(product.getSold()); // Thêm sold
+
+            this.productService.handleSaveProduct(currentProduct);
+        }
+        return "redirect:/admin/product";
+    }
+
+    // DELETE
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        // User user = new User();
+        // user.setId(id);
+        model.addAttribute("deleteUser", new Product());
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("deleteUser") User eric) {
+        this.productService.deleteAUser(eric.getId());
+        return "redirect:/admin/product";
+    }
 }
