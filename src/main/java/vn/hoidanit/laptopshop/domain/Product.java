@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,8 +31,10 @@ public class Product {
 
     private String image;
 
-    @NotBlank(message = "Detail description is required")
+    @NotNull
     @Size(min = 10, max = 1000, message = "Detail description must be between 10 and 1000 characters")
+    @NotBlank(message = "Detail description is required")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotBlank(message = "Short description is required")
