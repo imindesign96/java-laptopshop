@@ -92,7 +92,7 @@
                                                             <div
                                                                 class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                 <h4 style="font-size: 15px;">
-                                                                    <a href="/product/${product.id}">
+                                                                    <a href="/client/product/${product.id}">
                                                                         ${product.name}
                                                                     </a>
 

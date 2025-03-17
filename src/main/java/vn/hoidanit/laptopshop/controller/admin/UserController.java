@@ -3,6 +3,7 @@ package vn.hoidanit.laptopshop.controller.admin;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,15 +20,15 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserController(
             UserService userService,
             UploadService uploadService,
-            BCryptPasswordEncoder bCryptPasswordEncoder) {
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -78,7 +79,7 @@ public class UserController {
 
         try {
             String avatar = this.uploadService.handleUploadFile(file, "avatar");
-            String hashPassword = this.bCryptPasswordEncoder.encode(hoidanit.getPassword());
+            String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
             hoidanit.setAvatar(avatar);
             hoidanit.setPassword(hashPassword);
 

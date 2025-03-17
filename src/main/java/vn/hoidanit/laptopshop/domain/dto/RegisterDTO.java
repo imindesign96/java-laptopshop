@@ -1,33 +1,26 @@
-package vn.hoidanit.laptopshop.domain;
+package vn.hoidanit.laptopshop.domain.dto;
 
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class RegisterDTO {
 
     @NotBlank(message = "Email is required")
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "Email must be a valid format")
+    @Email(message = "Email must be a valid format")
     @Size(max = 100, message = "Email must not exceed 100 characters")
     private String email;
 
     @NotBlank(message = "Password is required")
-    private String password; // Loại bỏ @Size vì mật khẩu đã mã hóa sẽ dài hơn 30 ký tự
+    @Size(min = 6, max = 30, message = "Password must be between 6 and 30 characters")
+    private String password;
+
+    @NotBlank(message = "Confirm password is required")
+    @Size(min = 6, max = 30, message = "Confirm password must be between 6 and 30 characters")
+    private String confirmPassword;
 
     @NotBlank(message = "Full name is required")
     @Size(min = 2, max = 50, message = "Full name must be between 2 and 50 characters")
@@ -41,25 +34,25 @@ public class User {
     @Pattern(regexp = "^\\d{10,12}$", message = "Phone must be 10-12 digits")
     private String phone;
 
-    @Size(max = 255, message = "Avatar path must not exceed 255 characters")
-    private String avatar;
+    // File upload cho avatar
+    private MultipartFile avatarFile;
 
-    @ManyToOne
-    @JoinColumn(name = "roleId")
-    private Role role;
+    // Constructors
+    public RegisterDTO() {
+    }
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    public RegisterDTO(String email, String password, String confirmPassword, String fullName, String address,
+            String phone, MultipartFile avatarFile) {
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.fullName = fullName;
+        this.address = address;
+        this.phone = phone;
+        this.avatarFile = avatarFile;
+    }
 
     // Getters và Setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -74,6 +67,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFullName() {
@@ -100,27 +101,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public MultipartFile getAvatarFile() {
+        return avatarFile;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setAvatarFile(MultipartFile avatarFile) {
+        this.avatarFile = avatarFile;
     }
 }
