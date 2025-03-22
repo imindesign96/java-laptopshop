@@ -59,11 +59,11 @@ public class HomePageController {
         return "client/auth/register";
     }
 
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("loginDTO", new LoginDTO());
-        return "client/auth/login";
-    }
+    // @GetMapping("/login")
+    // public String showLoginForm(Model model) {
+    // model.addAttribute("loginDTO", new LoginDTO());
+    // return "client/auth/login";
+    // }
 
     @PostMapping("client/auth/register")
     public String processRegistration(
