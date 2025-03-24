@@ -17,18 +17,11 @@ public class ClientProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/client/product")
-    public String getProduct(Model model) {
-        long id = 5L; // Gán giá trị cố định id = 5
+    @GetMapping("/product/{id}")
+    public String getProductPage(Model model, @PathVariable long id) {
+        Product pr = this.productService.fetchProductById(id);
+        model.addAttribute("product", pr);
         model.addAttribute("id", id);
-        return "/client/product/show"; // Trả về view chứa đoạn mã JSP
-    }
-
-    @GetMapping("/client/product/{id}")
-    public String getProductDetail(Model model, @PathVariable long id) {
-        Product product = this.productService.getProductById(id);
-        model.addAttribute("id", id);
-        model.addAttribute("product", product);
-        return "/client/product/show";
+        return "client/product/show";
     }
 }

@@ -4,16 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
@@ -59,11 +56,20 @@ public class HomePageController {
         return "client/auth/register";
     }
 
-    // @GetMapping("/login")
-    // public String showLoginForm(Model model) {
-    // model.addAttribute("loginDTO", new LoginDTO());
-    // return "client/auth/login";
-    // }
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("loginDTO", new LoginDTO());
+        return "client/auth/login";
+    }
+
+    @PostMapping("/login")
+    public String processLoginForm(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "client/auth/login"; // Trả về form với lỗi validation
+        }
+        // Nếu không có lỗi, để Spring Security xử lý
+        return "redirect:/login";
+    }
 
     @PostMapping("client/auth/register")
     public String processRegistration(
